@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+{{ super() }}
+          <a href="/exitacc" class="nav-link px-2 text-black">Выйти</a>
+          <a class="btn btn-outline-light me-2" href="/login" role="button">Личный кабинет</a>
+<div class="container">
+    <h3 align="center" >Ваш профиль {{ username }}:</h3>
+    <form method="POST">
+        <h5>Номер телефона: {{ ph_number }}</h5>
+    </form>
+    <form method="POST">
+        <h5>Имя в системе: {{ ph_number }}</h5>
+    </form>
+    <form method="POST">
+        <h5>Бонусный счет: {{ ph_number }}</h5>
+    </form>
+    <h3 align="center" >Ваши заказы:</h3>
+</div>
+{% endblock %}
+

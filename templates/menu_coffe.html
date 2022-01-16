@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+{{ super() }}
+<table class="table">
+ <thead>
+            <tr>
+                <th>Название напитка</th>
+                <th>Цена </th>
+            </tr>
+ </thead>
+            {% for item in items %}
+                 <tr>
+                  <td>{{ item.1 }}</td>
+                  <td>{{ item.2 }} руб. </td>
+                 </tr>
+            {% endfor %}
+        </table>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<h1 align="left">Вы успешно вышли с аккаунта!</h1>
+{% if sess==True %}<a>Выйти</a>
+{% else %}<a href="/login" >Войти</a>
+{% endif %}
+
+{% endblock %}
+
