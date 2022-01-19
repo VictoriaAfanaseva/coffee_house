@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+{{ super() }}
+<center><h5>{{ excepti }}</h5></center>
+<form align="left" method="post">
+<div class="container">
+<table class="table">
+ <thead>
+            <tr>
+                <th>Название напитка</th>
+                <th>Цена </th>
+                <th></th>
+
+            </tr>
+ </thead>
+            {% for r in data %}
+            {% if r[0]  == username%}
+                 <tr>
+                  <td>{{ r[2] }}</td>
+                  <td>{{ r[4] }} руб.</td>
+                  <td><input type="submit" name="delcart{{r[0]}}-{{r[1]}}-{{r[2]}}-{{r[3]}}-{{r[4]}}" id="delcart{{r[0]}}-{{r[1]}}-{{r[2]}}-{{r[3]}}-{{r[4]}}" class="btn btn-secondary" value="Удалить"class="btn btn-secondary"> </td>
+                 </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    <h5 align="left" >Сумма к оплате: {{ summ_price }} руб.</h5>
+    <input type="submit" name="addorder{{username}}" id="addorder{{username}}" class="btn btn-secondary"  value="Оформить заказ" >
+   </div>
+</form>
+{% endblock %}
+

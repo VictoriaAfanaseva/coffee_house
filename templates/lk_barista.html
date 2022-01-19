@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+{{ super() }}
+          <a href="/menu" class="btn btn-secondary">Поиск по клиентам</a>
+          <a class="btn btn-secondary" href="/exitacc" role="button">Выйти</a>
+<div class="container">
+    <h4 align="center" >Личный кабинет сотрудника</h4>
+    <form method="POST">
+        <h5>Персональный номер: {{ id_barista_cf }}</h5>
+    </form>
+    <form method="POST">
+        <h5>Имя в системе: {{ name_barista_cf }}</h5>
+    </form>
+
+    <h4 align="center" >Принятые заказы:</h4>
+ <table class="table">
+ <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата </th>
+                <th>Состав заказа </th>
+                <th>Сумма оплаты </th>
+                <th></th>
+            </tr>
+ </thead>
+            {% for r in data %}
+            {% if r[2] == username and (r[5] == 'Готовится')%}
+                 <tr>
+                      <td>{{ r[3] }}</td>
+                      <td>{{ r[1] }}</td>
+                      <td>
+                          <ol>
+                            {% for i in range(menu_cf_len) %}
+                              {% if r[3] == menu_cf[i][0]%}
+                                 <li>{{ menu_cf[i][2]}}<br> </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ol>
+                      </td>
+                      <td>{{ r[4] }} руб.</td>
+                      <td><input type="submit" id="complete{{r[3]}}-{{r[1]}}" name="complete{{r[3]}}-{{r[1]}}"  class="btn btn-secondary"  value="Заказ выдан" ></td>
+                 </tr>
+           {% endif %}
+            {% endfor %}
+        </table>
+
+    <h4 align="center" >Заказы, ожидающие обработку:</h4>
+ <table class="table">
+ <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата </th>
+                <th>Состав заказа </th>
+                <th>Сумма оплаты </th>
+                <th></th>
+            </tr>
+ </thead>
+            {% for r in data %}
+            {% if r[5] == 'В обработке'%}
+                 <tr>
+                      <td>{{ r[3] }}</td>
+                      <td>{{ r[1] }}</td>
+                      <td>
+                          <ol>
+                            {% for i in range(menu_cf_len) %}
+                              {% if r[3] == menu_cf[i][0]%}
+                                 <li>{{ menu_cf[i][2]}}<br> </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ol>
+                      </td>
+                      <td>{{ r[4] }} руб.</td>
+                      <td><input type="submit" id="accept_order{{r[3]}}-{{r[1]}}" name="accept_order{{r[3]}}-{{r[1]}}"  class="btn btn-secondary"  value="Принять заказ" ></td>
+                 </tr>
+           {% endif %}
+            {% endfor %}
+        </table>
+
+<h4 align="center" >История, исполненых Вами, заказов:</h4>
+<table class="table">
+ <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата </th>
+                <th>Состав заказа </th>
+                <th>Сумма оплаты </th>
+            </tr>
+ </thead>
+            {% for r in data %}
+            {% if r[2] == username and (r[5] == 'Готов')%}
+                 <tr>
+                      <td>{{ r[3] }}</td>
+                      <td>{{ r[1] }}</td>
+                      <td>
+                          <ol>
+                            {% for i in range(menu_cf_len) %}
+                              {% if r[3] == menu_cf[i][0]%}
+                                 <li>{{ menu_cf[i][2]}}<br> </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ol>
+                      </td>
+                      <td>{{ r[4] }} руб.</td>
+                 </tr>
+           {% endif %}
+            {% endfor %}
+        </table>
+
+
+</div>
+{% endblock %}
+

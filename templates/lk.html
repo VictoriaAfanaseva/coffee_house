@@ -2,20 +2,54 @@
  
 {% block content %}
 {{ super() }}
-          <a href="/exitacc" class="nav-link px-2 text-black">Выйти</a>
-          <a class="btn btn-outline-light me-2" href="/login" role="button">Личный кабинет</a>
+          <a href="/menu" class="btn btn-secondary">Сделать заказ</a>
+          <a href="/cart" class="btn btn-secondary">Корзина</a>
+          <a class="btn btn-secondary" href="/exitacc" role="button">Выйти</a>
 <div class="container">
-    <h3 align="center" >Ваш профиль {{ username }}:</h3>
+    <h4 align="center" >Ваш профиль</h4>
     <form method="POST">
         <h5>Номер телефона: {{ ph_number }}</h5>
     </form>
     <form method="POST">
-        <h5>Имя в системе: {{ ph_number }}</h5>
+        <h5>Имя в системе: {{ name_cl }}</h5>
     </form>
     <form method="POST">
-        <h5>Бонусный счет: {{ ph_number }}</h5>
+        <h5>Бонусный счет: {{ bonus_cl }}</h5>
     </form>
-    <h3 align="center" >Ваши заказы:</h3>
+    <h4 align="center" >Ваши заказы:</h4>
+
+<table class="table">
+ <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата </th>
+                <th>Состав заказа </th>
+                <th>Сумма оплаты </th>
+                <th>Статус заказа </th>
+            </tr>
+ </thead>
+            {% for item in items %}
+            {% if item.0 == username%}
+                 <tr>
+                      <td>{{ item.3 }}</td>
+                      <td>{{ item.1 }}</td>
+                      <td>
+                          <ol>
+                            {% for i in range(menu_cf_len) %}
+                              {% if item.3 == menu_cf[i][0]%}
+                                 <li>{{ menu_cf[i][2]}}<br> </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ol>
+                      </td>
+                      <td>{{ item.4 }} руб.</td>
+                     <td>{{ item.5 }}</td>
+                 </tr>
+           {% endif %}
+            {% endfor %}
+        </table>
+
+
 </div>
 {% endblock %}
 

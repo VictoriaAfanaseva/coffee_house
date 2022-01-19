@@ -10,8 +10,6 @@
                 <th>Название напитка</th>
                 <th>Состав </th>
                 <th>Цена </th>
-                <th></th>
-
             </tr>
  </thead>
             {% for r in data %}
@@ -19,7 +17,6 @@
                   <td>{{ r[1] }}</td>
                   <td>{{ r[3] }}</td>
                   <td>{{ r[2] }} руб. </td>
-                  <td><input id="tocart{{r[0]}}-{{r[1]}}-{{r[2]}}" name="tocart{{r[0]}}-{{r[1]}}-{{r[2]}}" type="submit" class="btn btn-secondary"  value="В корзину" ></td>
                  </tr>
             {% endfor %}
         </table>
